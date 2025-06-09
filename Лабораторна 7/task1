@@ -1,0 +1,78 @@
+phonebook = {
+    "Ivanov": "380501234567",
+    "Petrenko": "380631112233",
+    "Shevchenko": "380672223344",
+    "Kovalenko": "380503334455",
+    "Tkachenko": "380681234567",
+    "Boyko": "380931234567",
+    "Bondarenko": "380991112233",
+    "Melnyk": "380681111222",
+    "Kravchenko": "380973334455",
+    "Sydorenko": "380992222111"
+}
+
+def find_phone_by_name(phonebook, name):
+    if name in phonebook:
+        print(f"Номер телефону для {name}: {phonebook[name]}")
+    else:
+        print(f"{name} не знайдено у записнику.")
+
+def find_name_by_phone(phonebook, phone_number):
+    found = False
+    for name, number in phonebook.items():
+        if number == phone_number:
+            print(f"Прізвище для номера {phone_number}: {name}")
+            found = True
+            break
+    if not found:
+        print(f"Номер {phone_number} не знайдено у записнику.")
+
+def print_all(phonebook):
+    for name, number in phonebook.items():
+        print(f"{name}: {number}")
+
+def add_entry(phonebook):
+    name = input("Введіть прізвище: ")
+    number = input("Введіть номер телефону: ")
+    phonebook[name] = number
+    print(f"{name} додано.")
+
+def delete_entry(phonebook):
+    name = input("Введіть прізвище для видалення: ")
+    if name in phonebook:
+        del phonebook[name]
+        print(f"{name} видалено.")
+    else:
+        print(f"{name} не знайдено.")
+
+def main():
+    while True:
+        print("\nОберіть опцію:")
+        print("1 - Вивести всі записи")
+        print("2 - Додати новий запис")
+        print("3 - Видалити запис")
+        print("4 - Знайти номер за прізвищем")
+        print("5 - Знайти прізвище за номером телефону")
+        print("0 - Вийти")
+
+        choice = input("Ваш вибір: ")
+
+        if choice == "1":
+            print_all(phonebook)
+        elif choice == "2":
+            add_entry(phonebook)
+        elif choice == "3":
+            delete_entry(phonebook)
+        elif choice == "4":
+            name = input("Введіть прізвище для пошуку: ")
+            find_phone_by_name(phonebook, name)
+        elif choice == "5":
+            number = input("Введіть номер телефону для пошуку: ")
+            find_name_by_phone(phonebook, number)
+        elif choice == "0":
+            print("Вихід з програми.")
+            break
+        else:
+            print("Неправильний вибір, спробуйте ще раз.")
+
+main()
